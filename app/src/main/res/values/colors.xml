@@ -12,4 +12,5 @@
     <color name="color_bg_title_pressed">#222126</color>
     <color name="color_bg_publish_disable">#245724</color>
     <color name="color_bg_publish_enable">#1F9F11</color>
+    <color name="color_bg_img_place_holder">#49545C</color>
 </resources>
