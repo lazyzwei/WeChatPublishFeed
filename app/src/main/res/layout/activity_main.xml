@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_white"
     tools:context="com.obito.wechatpublishfeed.MainActivity">
 
     <android.support.v7.widget.RecyclerView
@@ -51,7 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/color_bg_place_holder"
-        android:visibility="gone">
+        tools:visibility="gone">
 
         <View
             android:layout_width="match_parent"

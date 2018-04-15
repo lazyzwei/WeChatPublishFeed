@@ -2,9 +2,6 @@ package com.obito.wechatpublishfeed.helper;
 
 import android.support.v7.widget.helper.ItemTouchHelper;
 
-/**
- * Created by zwfang on 2018/4/15.
- */
 
 public class FeedImageTouchHelper extends ItemTouchHelper {
 

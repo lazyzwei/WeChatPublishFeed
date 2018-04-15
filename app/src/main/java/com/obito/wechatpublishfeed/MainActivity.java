@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.RelativeLayout;
 
 import com.obito.wechatpublishfeed.helper.FeedImageTouchCallback;
 import com.obito.wechatpublishfeed.helper.FeedImageTouchHelper;
@@ -16,6 +17,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements OnItemMoveListener {
 
     private RecyclerView recyclerView;
+    private RelativeLayout container;
 
     private FeedLayoutManager layoutManager;
     private FeedImageAdapter adapter;
@@ -27,13 +29,19 @@ public class MainActivity extends AppCompatActivity implements OnItemMoveListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
+        initImages();
         initTouchHelper();
+        layoutContainer();
     }
 
     private void initView() {
         recyclerView = findViewById(R.id.recyclerview);
+        container = findViewById(R.id.placeholder_container);
         layoutManager = new FeedLayoutManager(this, 4, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
+    }
+
+    private void initImages() {
         adapter = new FeedImageAdapter(this);
         datas.add("https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1523781928&di=6cb444c97297804abd343d163ce740bd&src=http://e.hiphotos.baidu.com/zhidao/pic/item/8ad4b31c8701a18bfb27b67d992f07082838fe30.jpg");
         datas.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1523792014586&di=efc381a58ff70839c1f27da80f0eadcb&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fforum%2Fw%3D580%2Fsign%3D7276a1157c1ed21b79c92eed9d6cddae%2Fb532ae0f4bfbfbed5e86069879f0f736adc31f93.jpg");
@@ -45,7 +53,6 @@ public class MainActivity extends AppCompatActivity implements OnItemMoveListene
         datas.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1523792014586&di=efc381a58ff70839c1f27da80f0eadcb&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fforum%2Fw%3D580%2Fsign%3D7276a1157c1ed21b79c92eed9d6cddae%2Fb532ae0f4bfbfbed5e86069879f0f736adc31f93.jpg");
         adapter.setDatas(datas);
         recyclerView.setAdapter(adapter);
-
     }
 
     private void initTouchHelper() {
@@ -70,5 +77,29 @@ public class MainActivity extends AppCompatActivity implements OnItemMoveListene
         }
         adapter.notifyItemMoved(src, dst);
         return false;
+    }
+
+    private void layoutContainer() {
+        int top = 0;
+        if (datas.size() < 5) {
+            top = getResources().getDimensionPixelSize(R.dimen.dimen_size_160)
+                    + getResources().getDimensionPixelSize(R.dimen.dimen_size_62)
+                    + getResources().getDimensionPixelSize(R.dimen.dimen_size_18);
+        }
+        if (datas.size() > 4 && datas.size() < 9) {
+            top = getResources().getDimensionPixelSize(R.dimen.dimen_size_160)
+                    + getResources().getDimensionPixelSize(R.dimen.dimen_size_62) * 2
+                    + getResources().getDimensionPixelSize(R.dimen.dimen_size_8)
+                    + getResources().getDimensionPixelSize(R.dimen.dimen_size_18);
+        }
+        if (datas.size() >= 9) {
+            top = getResources().getDimensionPixelSize(R.dimen.dimen_size_160)
+                    + getResources().getDimensionPixelSize(R.dimen.dimen_size_62) * 3
+                    + getResources().getDimensionPixelSize(R.dimen.dimen_size_8) * 2
+                    + getResources().getDimensionPixelSize(R.dimen.dimen_size_18);
+        }
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) container.getLayoutParams();
+        params.topMargin = top;
+        container.setLayoutParams(params);
     }
 }
