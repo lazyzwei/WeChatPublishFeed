@@ -5,4 +5,11 @@
     <color name="colorAccent">#FF4081</color>
     <color name="color_white">#FFFFFF</color>
     <color name="color_ed_hint">#FF9B9B9B</color>
+    <color name="color_bg_place_holder">#FFF2F2F3</color>
+    <color name="color_bg_title_line">#E0E0E0</color>
+    <color name="color_bg_delete_image">#E75452</color>
+    <color name="color_bg_title">#2B2C30</color>
+    <color name="color_bg_title_pressed">#222126</color>
+    <color name="color_bg_publish_disable">#245724</color>
+    <color name="color_bg_publish_enable">#1F9F11</color>
 </resources>
