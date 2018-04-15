@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.obito.wechatpublishfeed.helper.FeedImageTouchCallback;
+import com.obito.wechatpublishfeed.helper.FeedImageTouchHelper;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
+        initTouchHelper();
     }
 
     private void initView() {
@@ -38,5 +42,13 @@ public class MainActivity extends AppCompatActivity {
         datas.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1523792014586&di=efc381a58ff70839c1f27da80f0eadcb&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fforum%2Fw%3D580%2Fsign%3D7276a1157c1ed21b79c92eed9d6cddae%2Fb532ae0f4bfbfbed5e86069879f0f736adc31f93.jpg");
         adapter.setDatas(datas);
         recyclerView.setAdapter(adapter);
+
+    }
+
+    private void initTouchHelper() {
+        FeedImageTouchCallback touchCallback = new FeedImageTouchCallback();
+
+        FeedImageTouchHelper touchHelper = new FeedImageTouchHelper(touchCallback);
+        touchHelper.attachToRecyclerView(recyclerView);
     }
 }
