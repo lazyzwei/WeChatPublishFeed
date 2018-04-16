@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchCallbackLi
 
     private FeedLayoutManager layoutManager;
     private FeedImageAdapter adapter;
+    private boolean isDraging;
     private List<String> datas = new ArrayList<>();
 
     @Override
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchCallbackLi
                 if (event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_MOVE) {
                     ViewCompat.setTranslationZ(recyclerView, 2f);
                     ViewCompat.setTranslationZ(title, 3f);
-                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                } else if (event.getAction() == MotionEvent.ACTION_UP && !isDraging) {
                     ViewCompat.setTranslationZ(recyclerView, 0);
                     ViewCompat.setTranslationZ(title, 0);
                 }
@@ -103,11 +104,14 @@ public class MainActivity extends AppCompatActivity implements OnTouchCallbackLi
 
     @Override
     public void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int actionState) {
-
+        if (actionState == ItemTouchHelper.ACTION_STATE_DRAG) {
+            isDraging = true;
+        }
     }
 
     @Override
     public void onClearView() {
+        isDraging = false;
         ViewCompat.setTranslationZ(recyclerView, 0);
         ViewCompat.setTranslationZ(title, 0);
     }
