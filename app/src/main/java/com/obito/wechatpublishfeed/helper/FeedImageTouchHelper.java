@@ -5,8 +5,6 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 
 public class FeedImageTouchHelper extends ItemTouchHelper {
 
-    FeedImageTouchCallback callback;
-
     /**
      * Creates an ItemTouchHelper that will work with the given Callback.
      * <p>
@@ -18,8 +16,6 @@ public class FeedImageTouchHelper extends ItemTouchHelper {
      */
     public FeedImageTouchHelper(Callback callback) {
         super(callback);
-        this.callback = (FeedImageTouchCallback) callback;
     }
-
 
 }

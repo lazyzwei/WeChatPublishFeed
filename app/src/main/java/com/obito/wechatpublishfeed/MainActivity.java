@@ -1,27 +1,32 @@
 package com.obito.wechatpublishfeed;
 
+import android.os.Build;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.obito.wechatpublishfeed.helper.FeedImageTouchCallback;
 import com.obito.wechatpublishfeed.helper.FeedImageTouchHelper;
-import com.obito.wechatpublishfeed.listener.OnItemMoveListener;
+import com.obito.wechatpublishfeed.listener.OnTouchCallbackListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements OnItemMoveListener {
+public class MainActivity extends AppCompatActivity implements OnTouchCallbackListener {
 
     private RecyclerView recyclerView;
     private RelativeLayout container;
+    private View title;
 
     private FeedLayoutManager layoutManager;
     private FeedImageAdapter adapter;
-
     private List<String> datas = new ArrayList<>();
 
     @Override
@@ -39,6 +44,10 @@ public class MainActivity extends AppCompatActivity implements OnItemMoveListene
         container = findViewById(R.id.placeholder_container);
         layoutManager = new FeedLayoutManager(this, 4, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
+        title = findViewById(R.id.layout_title);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            title.setOutlineProvider(null);
+        }
     }
 
     private void initImages() {
@@ -53,11 +62,24 @@ public class MainActivity extends AppCompatActivity implements OnItemMoveListene
         datas.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1523792014586&di=efc381a58ff70839c1f27da80f0eadcb&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fforum%2Fw%3D580%2Fsign%3D7276a1157c1ed21b79c92eed9d6cddae%2Fb532ae0f4bfbfbed5e86069879f0f736adc31f93.jpg");
         adapter.setDatas(datas);
         recyclerView.setAdapter(adapter);
+        recyclerView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_MOVE) {
+                    ViewCompat.setTranslationZ(recyclerView, 2f);
+                    ViewCompat.setTranslationZ(title, 3f);
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    ViewCompat.setTranslationZ(recyclerView, 0);
+                    ViewCompat.setTranslationZ(title, 0);
+                }
+                return false;
+            }
+        });
     }
 
     private void initTouchHelper() {
         FeedImageTouchCallback touchCallback = new FeedImageTouchCallback();
-        touchCallback.setItemMoveListener(this);
+        touchCallback.setTouchCallbackListener(this);
         FeedImageTouchHelper touchHelper = new FeedImageTouchHelper(touchCallback);
         touchHelper.attachToRecyclerView(recyclerView);
     }
@@ -77,6 +99,17 @@ public class MainActivity extends AppCompatActivity implements OnItemMoveListene
         }
         adapter.notifyItemMoved(src, dst);
         return false;
+    }
+
+    @Override
+    public void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int actionState) {
+
+    }
+
+    @Override
+    public void onClearView() {
+        ViewCompat.setTranslationZ(recyclerView, 0);
+        ViewCompat.setTranslationZ(title, 0);
     }
 
     private void layoutContainer() {

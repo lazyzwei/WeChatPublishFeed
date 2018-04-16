@@ -3,15 +3,15 @@ package com.obito.wechatpublishfeed.helper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
-import com.obito.wechatpublishfeed.listener.OnItemMoveListener;
+import com.obito.wechatpublishfeed.listener.OnTouchCallbackListener;
 
 
 public class FeedImageTouchCallback extends ItemTouchHelper.Callback {
 
-    private OnItemMoveListener itemMoveListener;
+    private OnTouchCallbackListener touchCallbackListener;
 
-    public void setItemMoveListener(OnItemMoveListener itemMoveListener) {
-        this.itemMoveListener = itemMoveListener;
+    public void setTouchCallbackListener(OnTouchCallbackListener touchCallbackListener) {
+        this.touchCallbackListener = touchCallbackListener;
     }
 
     @Override
@@ -23,8 +23,8 @@ public class FeedImageTouchCallback extends ItemTouchHelper.Callback {
 
     @Override
     public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-        if (itemMoveListener != null) {
-            return itemMoveListener.onItemMove(viewHolder,target);
+        if (touchCallbackListener != null) {
+            return touchCallbackListener.onItemMove(viewHolder, target);
         }
         return false;
     }
@@ -32,5 +32,21 @@ public class FeedImageTouchCallback extends ItemTouchHelper.Callback {
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
 
+    }
+
+    @Override
+    public void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int actionState) {
+        super.onSelectedChanged(viewHolder, actionState);
+        if (touchCallbackListener != null) {
+            touchCallbackListener.onSelectedChanged(viewHolder, actionState);
+        }
+    }
+
+    @Override
+    public void clearView(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+        super.clearView(recyclerView, viewHolder);
+        if (touchCallbackListener != null) {
+            touchCallbackListener.onClearView();
+        }
     }
 }
