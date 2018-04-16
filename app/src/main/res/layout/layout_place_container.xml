@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_bg_place_holder">
+
+    <RelativeLayout
+        android:id="@+id/item_view"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/color_white">
+
+        <ImageView
+            android:id="@+id/ic_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_view_item"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dimen_size_18"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/ic_view"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:text="谁可以看"
+            android:textSize="16sp"
+            />
+
+    </RelativeLayout>
+    <View
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/color_bg_title_line"
+        android:layout_below="@id/item_view"/>
+
+    <RelativeLayout
+        android:id="@+id/item_mention"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/line1"
+        android:background="@color/color_white">
+
+        <ImageView
+            android:id="@+id/ic_mention"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_mention_item"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dimen_size_18"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/ic_mention"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:text="提醒谁看"
+            android:textSize="16sp"
+            />
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -36,7 +36,6 @@
             android:background="@color/color_white"
             android:gravity="start|top"
             android:hint="这一刻的想法..."
-            android:textColorHint="@color/color_ed_hint"
             android:includeFontPadding="false"
             android:maxLines="4"
             android:paddingEnd="14dp"
@@ -44,6 +43,7 @@
             android:paddingRight="14dp"
             android:paddingStart="14dp"
             android:paddingTop="12dp"
+            android:textColorHint="@color/color_ed_hint"
             android:textSize="16sp" />
     </LinearLayout>
 
@@ -55,10 +55,18 @@
         tools:visibility="gone">
 
         <View
+            android:id="@+id/line1"
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:layout_alignParentTop="true"
             android:background="@color/color_bg_title_line" />
+
+        <include
+            android:id="@+id/view_placeholder"
+            layout="@layout/layout_place_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/line1" />
     </RelativeLayout>
 
     <RelativeLayout
