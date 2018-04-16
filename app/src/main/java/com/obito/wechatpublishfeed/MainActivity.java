@@ -10,6 +10,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.obito.wechatpublishfeed.helper.FeedImageTouchCallback;
 import com.obito.wechatpublishfeed.helper.FeedImageTouchHelper;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchCallbackLi
     private RelativeLayout container;
     private View title;
     private View rlDelete;
+    private TextView tvDelete;
 
     private FeedLayoutManager layoutManager;
     private FeedImageAdapter adapter;
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchCallbackLi
             title.setOutlineProvider(null);
         }
         rlDelete = findViewById(R.id.rl_delete);
+        tvDelete = findViewById(R.id.tv_delete_tips);
     }
 
     private void initImages() {
@@ -119,6 +122,21 @@ public class MainActivity extends AppCompatActivity implements OnTouchCallbackLi
         isDraging = false;
         ViewCompat.setTranslationZ(recyclerView, 0);
         ViewCompat.setTranslationZ(title, 0);
+    }
+
+    @Override
+    public void onChildDeleteState(boolean delete) {
+        int resId = delete ? getResources().getColor(R.color.color_bg_delete_image_selected)
+                : getResources().getColor(R.color.color_bg_delete_image);
+        String tips = delete ? getResources().getString(R.string.tips_delete_image_delete)
+                : getResources().getString(R.string.tips_delete_image);
+        rlDelete.setBackgroundColor(resId);
+        tvDelete.setText(tips);
+    }
+
+    @Override
+    public void onChildDelete() {
+
     }
 
     private void layoutContainer() {

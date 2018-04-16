@@ -29,7 +29,16 @@ public interface OnTouchCallbackListener {
      */
     void onClearView();
 
+    /**
+     * In deleteing state
+     *
+     * @param delete true delete,false normal
+     */
+    void onChildDeleteState(boolean delete);
 
-
+    /**
+     * delete current item
+     */
+    void onChildDelete();
 
 }

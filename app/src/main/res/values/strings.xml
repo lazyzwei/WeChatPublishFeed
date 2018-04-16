@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">WeChatPublishFeed</string>
+    <string name="tips_delete_image">拖动到此处删除</string>
+    <string name="tips_delete_image_delete">松手即可删除</string>
 </resources>
