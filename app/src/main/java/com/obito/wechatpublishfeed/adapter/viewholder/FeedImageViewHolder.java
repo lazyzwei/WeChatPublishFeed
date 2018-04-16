@@ -1,14 +1,14 @@
-package com.obito.wechatpublishfeed;
+package com.obito.wechatpublishfeed.adapter.viewholder;
 
 import android.content.Context;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.View;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.obito.wechatpublishfeed.R;
 
-import static com.obito.wechatpublishfeed.FeedImageAdapter.ITEM_ADD;
+import static com.obito.wechatpublishfeed.adapter.FeedImageAdapter.ITEM_ADD;
 
 
 public class FeedImageViewHolder extends RecyclerView.ViewHolder {

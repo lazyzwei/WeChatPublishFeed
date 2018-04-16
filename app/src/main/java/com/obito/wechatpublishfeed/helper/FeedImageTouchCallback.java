@@ -4,7 +4,7 @@ import android.graphics.Canvas;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
-import com.obito.wechatpublishfeed.FeedImageAdapter;
+import com.obito.wechatpublishfeed.adapter.FeedImageAdapter;
 import com.obito.wechatpublishfeed.R;
 import com.obito.wechatpublishfeed.listener.OnTouchCallbackListener;
 

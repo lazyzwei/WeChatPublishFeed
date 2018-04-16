@@ -1,4 +1,4 @@
-package com.obito.wechatpublishfeed;
+package com.obito.wechatpublishfeed.activity;
 
 import android.os.Build;
 import android.support.v4.view.ViewCompat;
@@ -12,6 +12,9 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.obito.wechatpublishfeed.adapter.FeedImageAdapter;
+import com.obito.wechatpublishfeed.FeedLayoutManager;
+import com.obito.wechatpublishfeed.R;
 import com.obito.wechatpublishfeed.helper.FeedImageTouchCallback;
 import com.obito.wechatpublishfeed.helper.FeedImageTouchHelper;
 import com.obito.wechatpublishfeed.listener.OnTouchCallbackListener;
@@ -20,8 +23,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static com.obito.wechatpublishfeed.FeedImageAdapter.ITEM_ADD;
-import static com.obito.wechatpublishfeed.FeedImageAdapter.TYPE_ADD;
+import static com.obito.wechatpublishfeed.adapter.FeedImageAdapter.ITEM_ADD;
+import static com.obito.wechatpublishfeed.adapter.FeedImageAdapter.TYPE_ADD;
 
 public class MainActivity extends AppCompatActivity implements OnTouchCallbackListener {
 
@@ -127,6 +130,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchCallbackLi
         isDraging = false;
         ViewCompat.setTranslationZ(recyclerView, 0);
         ViewCompat.setTranslationZ(title, 0);
+        layoutContainer();
     }
 
     @Override
@@ -144,12 +148,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchCallbackLi
         viewHolder.itemView.setVisibility(View.GONE);
         datas.remove(viewHolder.getAdapterPosition());
         adapter.notifyItemRemoved(viewHolder.getAdapterPosition());
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                layoutContainer();
-            }
-        });
     }
 
     private void layoutContainer() {

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_white"
-    tools:context="com.obito.wechatpublishfeed.MainActivity">
+    tools:context="com.obito.wechatpublishfeed.activity.MainActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview"
