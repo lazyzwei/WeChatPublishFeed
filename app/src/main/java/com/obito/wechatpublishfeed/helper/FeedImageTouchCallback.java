@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
+import com.obito.wechatpublishfeed.FeedImageAdapter;
 import com.obito.wechatpublishfeed.R;
 import com.obito.wechatpublishfeed.listener.OnTouchCallbackListener;
 
@@ -20,7 +21,9 @@ public class FeedImageTouchCallback extends ItemTouchHelper.Callback {
     @Override
     public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
         int dragFlags = 0;
-        dragFlags = ItemTouchHelper.LEFT | ItemTouchHelper.DOWN | ItemTouchHelper.UP | ItemTouchHelper.RIGHT;
+        if (viewHolder.getItemViewType() != FeedImageAdapter.TYPE_ADD) {
+            dragFlags = ItemTouchHelper.LEFT | ItemTouchHelper.DOWN | ItemTouchHelper.UP | ItemTouchHelper.RIGHT;
+        }
         return makeMovementFlags(dragFlags, 0);
     }
 

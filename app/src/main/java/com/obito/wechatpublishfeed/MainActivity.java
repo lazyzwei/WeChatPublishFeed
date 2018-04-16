@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -20,6 +19,9 @@ import com.obito.wechatpublishfeed.listener.OnTouchCallbackListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import static com.obito.wechatpublishfeed.FeedImageAdapter.ITEM_ADD;
+import static com.obito.wechatpublishfeed.FeedImageAdapter.TYPE_ADD;
 
 public class MainActivity extends AppCompatActivity implements OnTouchCallbackListener {
 
@@ -66,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchCallbackLi
         datas.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1523792014584&di=8c77e4922fc5ef57b74d5110beec6fdd&imgtype=0&src=http%3A%2F%2Fimages6.fanpop.com%2Fimage%2Fpolls%2F1360000%2F1360567_1396688397759_full.jpg%3Fv%3D1396688440");
         datas.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1523792014584&di=8c77e4922fc5ef57b74d5110beec6fdd&imgtype=0&src=http%3A%2F%2Fimages6.fanpop.com%2Fimage%2Fpolls%2F1360000%2F1360567_1396688397759_full.jpg%3Fv%3D1396688440");
         datas.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1523792014586&di=efc381a58ff70839c1f27da80f0eadcb&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fforum%2Fw%3D580%2Fsign%3D7276a1157c1ed21b79c92eed9d6cddae%2Fb532ae0f4bfbfbed5e86069879f0f736adc31f93.jpg");
+        datas.add(ITEM_ADD);
         adapter = new FeedImageAdapter(this, datas);
         recyclerView.setAdapter(adapter);
         recyclerView.setOnTouchListener(new View.OnTouchListener() {
@@ -92,6 +95,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchCallbackLi
 
     @Override
     public boolean onItemMove(RecyclerView.ViewHolder srcViewHolder, RecyclerView.ViewHolder targetViewHolder) {
+        if (srcViewHolder.getItemViewType() != targetViewHolder.getItemViewType() || srcViewHolder.getItemViewType() == TYPE_ADD)
+            return true;
         int src = srcViewHolder.getAdapterPosition();
         int dst = targetViewHolder.getAdapterPosition();
         if (src < dst) {

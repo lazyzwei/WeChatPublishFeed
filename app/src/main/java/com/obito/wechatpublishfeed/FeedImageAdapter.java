@@ -16,6 +16,11 @@ public class FeedImageAdapter extends RecyclerView.Adapter {
     private LayoutInflater inflater;
     private List<String> datas;
 
+    public static final String ITEM_ADD = "item_add";
+
+    public static final int TYPE_ADD = 0;
+    public static final int TYPE_PIC = 1;
+
     public FeedImageAdapter(Context context, List<String> images) {
         this.context = context;
         inflater = LayoutInflater.from(context);
@@ -40,5 +45,13 @@ public class FeedImageAdapter extends RecyclerView.Adapter {
     public int getItemCount() {
         if (datas == null || datas.size() == 0) return 0;
         return datas.size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (datas.get(position).equals(ITEM_ADD)) {
+            return TYPE_ADD;
+        }
+        return TYPE_PIC;
     }
 }
