@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchCallbackLi
     private RecyclerView recyclerView;
     private RelativeLayout container;
     private View title;
+    private View rlDelete;
 
     private FeedLayoutManager layoutManager;
     private FeedImageAdapter adapter;
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchCallbackLi
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             title.setOutlineProvider(null);
         }
+        rlDelete = findViewById(R.id.rl_delete);
     }
 
     private void initImages() {
@@ -106,6 +108,9 @@ public class MainActivity extends AppCompatActivity implements OnTouchCallbackLi
     public void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int actionState) {
         if (actionState == ItemTouchHelper.ACTION_STATE_DRAG) {
             isDraging = true;
+            showDeleteLayout(true);
+        } else if (actionState == ItemTouchHelper.ACTION_STATE_IDLE) {
+            showDeleteLayout(false);
         }
     }
 
@@ -138,5 +143,17 @@ public class MainActivity extends AppCompatActivity implements OnTouchCallbackLi
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) container.getLayoutParams();
         params.topMargin = top;
         container.setLayoutParams(params);
+    }
+
+    private void showDeleteLayout(boolean show) {
+        int detalY = getResources().getDimensionPixelSize(R.dimen.dimen_size_63);
+        if (show) {
+            rlDelete.setVisibility(View.VISIBLE);
+            ViewCompat.animate(rlDelete)
+                    .translationZ(3f).translationY(-detalY).alpha(1).start();
+        } else {
+            rlDelete.setVisibility(View.GONE);
+            ViewCompat.animate(rlDelete).translationY(0).alpha(0).start();
+        }
     }
 }
