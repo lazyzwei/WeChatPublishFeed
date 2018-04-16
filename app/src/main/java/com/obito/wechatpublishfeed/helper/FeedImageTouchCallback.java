@@ -60,7 +60,8 @@ public class FeedImageTouchCallback extends ItemTouchHelper.Callback {
         if (touchCallbackListener != null) {
             touchCallbackListener.onChildDeleteState(deleteState);
             if (deleteState && actionUp) {
-
+                actionUp = false;
+                touchCallbackListener.onChildDelete(viewHolder);
             }
         }
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);

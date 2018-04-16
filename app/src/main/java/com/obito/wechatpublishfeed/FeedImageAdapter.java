@@ -16,18 +16,12 @@ public class FeedImageAdapter extends RecyclerView.Adapter {
     private LayoutInflater inflater;
     private List<String> datas;
 
-    public FeedImageAdapter(Context context) {
+    public FeedImageAdapter(Context context, List<String> images) {
         this.context = context;
         inflater = LayoutInflater.from(context);
-        datas = new ArrayList<>();
-    }
-
-    public void setDatas(List<String> images) {
-        datas.clear();
-        datas.addAll(images);
+        datas = images;
         notifyDataSetChanged();
     }
-
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

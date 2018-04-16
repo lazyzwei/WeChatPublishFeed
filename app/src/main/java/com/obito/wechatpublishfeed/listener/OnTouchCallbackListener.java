@@ -39,6 +39,6 @@ public interface OnTouchCallbackListener {
     /**
      * delete current item
      */
-    void onChildDelete();
+    void onChildDelete(RecyclerView.ViewHolder viewHolder);
 
 }
