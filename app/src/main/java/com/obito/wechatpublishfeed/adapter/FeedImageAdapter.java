@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.obito.wechatpublishfeed.adapter.viewholder.FeedImageViewHolder;
 import com.obito.wechatpublishfeed.R;
+import com.obito.wechatpublishfeed.listener.OnItemClickListener;
 
 import java.util.List;
 
@@ -22,6 +23,8 @@ public class FeedImageAdapter extends RecyclerView.Adapter {
 
     public static final int TYPE_ADD = 0;
     public static final int TYPE_PIC = 1;
+
+    private OnItemClickListener itemClickListener;
 
     public FeedImageAdapter(Context context, List<String> images) {
         this.context = context;
@@ -38,9 +41,17 @@ public class FeedImageAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         FeedImageViewHolder viewHolder = (FeedImageViewHolder) holder;
         viewHolder.bindView(datas.get(position));
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (itemClickListener != null) {
+                    itemClickListener.onItemClick(holder.getAdapterPosition());
+                }
+            }
+        });
     }
 
     @Override
@@ -55,5 +66,9 @@ public class FeedImageAdapter extends RecyclerView.Adapter {
             return TYPE_ADD;
         }
         return TYPE_PIC;
+    }
+
+    public void setItemClickListener(OnItemClickListener itemClickListener) {
+        this.itemClickListener = itemClickListener;
     }
 }

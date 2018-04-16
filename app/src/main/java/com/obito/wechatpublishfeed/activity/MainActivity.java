@@ -17,6 +17,7 @@ import com.obito.wechatpublishfeed.FeedLayoutManager;
 import com.obito.wechatpublishfeed.R;
 import com.obito.wechatpublishfeed.helper.FeedImageTouchCallback;
 import com.obito.wechatpublishfeed.helper.FeedImageTouchHelper;
+import com.obito.wechatpublishfeed.listener.OnItemClickListener;
 import com.obito.wechatpublishfeed.listener.OnTouchCallbackListener;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ import java.util.List;
 import static com.obito.wechatpublishfeed.adapter.FeedImageAdapter.ITEM_ADD;
 import static com.obito.wechatpublishfeed.adapter.FeedImageAdapter.TYPE_ADD;
 
-public class MainActivity extends AppCompatActivity implements OnTouchCallbackListener {
+public class MainActivity extends AppCompatActivity implements OnTouchCallbackListener, OnItemClickListener {
 
     private RecyclerView recyclerView;
     private RelativeLayout container;
@@ -73,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchCallbackLi
         datas.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1523792014586&di=efc381a58ff70839c1f27da80f0eadcb&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fforum%2Fw%3D580%2Fsign%3D7276a1157c1ed21b79c92eed9d6cddae%2Fb532ae0f4bfbfbed5e86069879f0f736adc31f93.jpg");
         datas.add(ITEM_ADD);
         adapter = new FeedImageAdapter(this, datas);
+        adapter.setItemClickListener(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -148,6 +150,10 @@ public class MainActivity extends AppCompatActivity implements OnTouchCallbackLi
         viewHolder.itemView.setVisibility(View.GONE);
         datas.remove(viewHolder.getAdapterPosition());
         adapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+    }
+
+    @Override
+    public void onItemClick(int postion) {
     }
 
     private void layoutContainer() {
