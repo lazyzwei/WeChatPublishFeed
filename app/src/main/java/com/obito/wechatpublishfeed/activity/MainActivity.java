@@ -1,5 +1,6 @@
 package com.obito.wechatpublishfeed.activity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -154,6 +155,10 @@ public class MainActivity extends AppCompatActivity implements OnTouchCallbackLi
 
     @Override
     public void onItemClick(int postion) {
+        Intent intent = new Intent(MainActivity.this, ImagePreviewActivity.class);
+        intent.putStringArrayListExtra("images", (ArrayList<String>) datas);
+        intent.putExtra("postion", postion);
+        startActivityForResult(intent, 0);
     }
 
     private void layoutContainer() {
