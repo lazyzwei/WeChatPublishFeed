@@ -20,6 +20,7 @@ import com.obito.wechatpublishfeed.helper.FeedImageTouchCallback;
 import com.obito.wechatpublishfeed.helper.FeedImageTouchHelper;
 import com.obito.wechatpublishfeed.listener.OnItemClickListener;
 import com.obito.wechatpublishfeed.listener.OnTouchCallbackListener;
+import com.obito.wechatpublishfeed.utils.DialogUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -155,6 +156,18 @@ public class MainActivity extends AppCompatActivity implements OnTouchCallbackLi
 
     @Override
     public void onItemClick(int postion) {
+        if (datas.get(postion).equals(ITEM_ADD)) {
+            // TODO check premission and dialog
+            DialogUtils.showListDialog(this, new String[]{
+                    "拍照", "打开相册"
+            }, new DialogUtils.ListDialogCallback() {
+                @Override
+                public void onItemClick(int postion) {
+
+                }
+            });
+            return;
+        }
         Intent intent = new Intent(MainActivity.this, ImagePreviewActivity.class);
         intent.putStringArrayListExtra("images", (ArrayList<String>) datas);
         intent.putExtra("postion", postion);
